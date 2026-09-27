@@ -22,7 +22,7 @@ int main()
 
     std::cout << ++number << '\n';
 
-    Fraction f1 = Fraction(4, 7);
+    Fraction f1 = Fraction(1, 7);
     Fraction f2 = Fraction(3, 7);
 
     //f1++;
@@ -31,5 +31,12 @@ int main()
     //Fraction sum = Fraction::add(f1, f2);
     Fraction sum = f1 + f2;
 
-    //std::cout << sum << '\n';
+    Fraction f = 1 + f1;
+    //Fraction f = f1 + 2;
+
+    std::cout << sum << '\n';
+
+    std::cin >> f1;
+
+    std::cout << f1;
 }

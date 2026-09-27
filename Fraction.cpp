@@ -55,6 +55,37 @@ Fraction Fraction::operator+(const Fraction& right) const {
 	return Fraction(num, denom);
 }
 
+Fraction Fraction::operator+(int right) const {
+	int num = right * denominator + numerator;
+	int denom = denominator;
+
+	return Fraction(num, denom);
+}
+
+Fraction operator+(int left, const Fraction& right) {
+	return right + left;
+}
+
+std::ostream& operator<<(std::ostream& out, const Fraction& obj) {
+	out << obj.numerator << '/' << obj.denominator;
+	return out;
+}
+
+ std::istream& operator>>(std::istream& in, Fraction& obj) {
+	// 4/9
+	char slesh;
+	in >> obj.numerator >> slesh >> obj.denominator;
+
+	if (obj.denominator == 0) {
+		std::cout << "Denominator cannot be zero. Setting to 1." << '\n';
+		obj.denominator = 1;
+	}
+
+	simplifyFraction(obj.numerator, obj.denominator);
+
+	return in;
+}
+
 Fraction& Fraction::operator++() {
 	numerator += denominator;
 	return *this;
