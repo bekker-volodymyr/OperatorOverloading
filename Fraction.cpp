@@ -48,6 +48,7 @@ Fraction Fraction::add(const Fraction& f1, const Fraction& f2) {
 	return Fraction(num, denom);
 }
 
+// Operator +
 Fraction Fraction::operator+(const Fraction& right) const {
 	int num = this->numerator * right.denominator + right.numerator * this->denominator;
 	int denom = this->denominator * right.denominator;
@@ -66,12 +67,58 @@ Fraction operator+(int left, const Fraction& right) {
 	return right + left;
 }
 
+// Operator -
+Fraction Fraction::operator-(const Fraction& right) const {
+	int num = this->numerator * right.denominator - right.numerator * this->denominator;
+	int denom = this->denominator * right.denominator;
+	return Fraction(num, denom);
+}
+
+Fraction Fraction::operator-(int right) const {
+	int num = this->numerator - (right * denominator);
+	return Fraction(num, denominator);
+}
+
+Fraction operator-(int left, const Fraction& right) {
+	int num = (right.denominator * left) - right.denominator;
+	return Fraction(num, right.denominator);
+}
+
+// Operator *
+Fraction Fraction::operator*(const Fraction& right) const {
+	int num = this->numerator * right.numerator;
+	int denom = this->denominator * right.denominator;
+	return Fraction(num, denom);
+}
+Fraction Fraction::operator*(int right)const {
+	int num = this->numerator * right;
+	return Fraction(num, denominator);
+}
+Fraction operator*(int left, const Fraction& right) {
+	return right * left;
+}
+
+// Operator /
+Fraction Fraction::operator/(const Fraction& right) const {
+	int num = this->numerator * right.denominator;
+	int denom = this->denominator * right.numerator;
+	return Fraction(num, denom);
+}
+Fraction Fraction::operator/(int right) const {
+	int denom = this->denominator * right;
+	return Fraction(numerator, denom);
+}
+Fraction operator/(int left, const Fraction& right) {
+	//int num = left * right
+}
+
+// Output/Input
 std::ostream& operator<<(std::ostream& out, const Fraction& obj) {
 	out << obj.numerator << '/' << obj.denominator;
 	return out;
 }
 
- std::istream& operator>>(std::istream& in, Fraction& obj) {
+std::istream& operator>>(std::istream& in, Fraction& obj) {
 	// 4/9
 	char slesh;
 	in >> obj.numerator >> slesh >> obj.denominator;
@@ -86,6 +133,7 @@ std::ostream& operator<<(std::ostream& out, const Fraction& obj) {
 	return in;
 }
 
+// Increment/Decrement
 Fraction& Fraction::operator++() {
 	numerator += denominator;
 	return *this;
@@ -94,5 +142,16 @@ Fraction& Fraction::operator++() {
 Fraction Fraction::operator++(int) {
 	Fraction temp = *this;
 	++(*this);
+	return temp;
+}
+
+Fraction& Fraction::operator--() {
+	numerator -= denominator;
+	return *this;
+}
+
+Fraction Fraction::operator--(int) {
+	Fraction temp = (*this);
+	--(*this);
 	return temp;
 }
